@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>文章发表</title>
+  <link rel="stylesheet" href="/layui/css/layui.css">
+  <link rel="stylesheet" href="/css/index.css">
+  <link rel="stylesheet" href="/css/nav.css">
+  <link rel="stylesheet" href="/css/article.css">
+  <style>
+    #loading{
+      position: absolute; 
+      text-align: center; 
+      width: 100%; 
+      height: 100%; 
+      background-color: #000; 
+      opacity: .5;
+      z-index: 999;
+      overflow: hidden;
+    }
+    #loading i{
+      display: block;
+      margin-top: 200px;
+      font-size: 70px;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div id="loading">
+      <i class="layui-icon layui-anim layui-anim-rotate layui-anim-loop layui-icon-loading"></i>
+  </div>
+  <div class="blog-header layui-bg-cyan">
+		<div class="layui-container">
+			<ul class="layui-nav layui-bg-cyan">
+				<li class="layui-nav-item"><a href="/">
+						<i class="layui-icon layui-icon-home">首页</i>
+					</a></li>
+				<li class="layui-nav-item"><a href="/">Web</a></li>
+				<li class="layui-nav-item"><a href="/">大数据</a></li>
+				<li class="layui-nav-item"><a href="/">Java</a></li>
+				<li class="layui-nav-item"><a href="/">C++</a></li>
+				<li class="layui-nav-item"><a href="/">Python</a></li>
+				<li class="layui-nav-item"><a href="/">更多</a></li>
+			</ul>
+			<ul class="layui-nav blog-user layui-bg-cyan user-alylog">
+					<li class="layui-nav-item">
+						<a class="infocenter" href="admin/manager">个人中心</a>
+						<!-- <span class="layui-badge-dot"></span> -->
+					</li>
+					<li class="layui-nav-item">
+						<a href="javascript:;">
+							<img class="user-avatar layui-nav-img" src="" alt="">
+							<span class="user-name"></span>
+						</a>
+						<dl class="layui-nav-child">
+							<dd>
+								<a class="user-logout" href="/user/logout">退出登录</a>
+							</dd>
+						</dl>
+					</li>
+			</ul>
+			<ul class="layui-nav blog-user layui-bg-cyan user-notlog">
+				<li class="layui-nav-item"><a href="/user/login">登录</a></li>
+				<li class="layui-nav-item"><a href="/user/reg">注册</a></li>
+			</ul>
+		</div>
+  </div>
+  <div class="blog-panel">
+		<div class="layui-container">
+			<ul class="layui-clear">
+				<li><a href="javascript:;">HTML</a></li>
+				<li><a href="javascript:;">CSS</a></li>
+				<li><a href="javascript:;">JavaScript</a></li>
+				<li><a href="javascript:;">node.js</a></li>
+				<li><a href="javascript:;">vue.js</a></li>
+			</ul>
+			<div class="blog-column-right">
+				<a href="/article" class="layui-btn layui-bg-blue">添加文章</a>
+			</div>
+		</div>
+	</div>
+  <div class="layui-container">
+    <div class="layui-row layui-col-space15">
+      <div class="layui-col-md8">
+        <div class="content default-box layui-text">
+          <h1 class="art-title text-center article-title" data-artid=""></h1>
+          <div class="other-info text-center article-data">
+            <span class="article-author"></span>
+            <span>&nbsp;&nbsp;发表于：</span>
+            <span class="article-time"></span>
+            <span>&nbsp;分类：</span>
+            <span class="article-tip"></span>
+          </div>
+          <div class="article-detail article-content" style="padding:10px;"></div>
+        </div>
+        <div class="comment default-box">
+          <fieldset class="text-center">
+            <legend>评论</legend>
+            
+          </fieldset>
+          <div class="txt">
+              <textarea id="comment-txt" placeholder=""></textarea>
+              <button class="layui-btn">回复</button>
+          </div>
+          <ul class="comment-list">
+          </ul>
+        </div>
+      </div>
+      <div class="layui-col-md4">
+				<div class="layui-card">
+					<div class="layui-card-header"><strong>最新公告</strong></div>
+					<div class="layui-card-body announce">
+						<p><a href="">刚刚发表了一篇关于js的博客</a></p>
+						<p><a href="">今天天气真好，出来钓鱼</a></p>
+						<p><a href="">当今IT发展趋势</a></p>
+						<p><a href="">关于node的坑</a></p>
+					</div>
+				</div>
+			</div>
+    </div>
+  </div>
+  <script src="/jquery/jquery.min.js"></script>
+	<script src="/layui/layui.js"></script>
+	<script src="/js/comment.js"></script>
+</body>
+</html>
