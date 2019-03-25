@@ -21,7 +21,7 @@ const CONFIG = {
   maxAge: 60 * 60 * 1000,
   overwrite: true,
   httpOnly: true, //是否被前端可见
-  // signed: true
+  signed: true
 }
 
 app

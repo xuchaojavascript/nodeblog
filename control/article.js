@@ -18,8 +18,6 @@ exports.addArtPage = async (ctx, next) => {
 // 添加文章
 exports.add = async (ctx) => {
     let data = ctx.request.body;
-    data.author = ctx.session.userId;
-
     await new Promise((res, rej) =>{
         new Article(data)
         .save((err, data) => {

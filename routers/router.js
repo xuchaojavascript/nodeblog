@@ -46,33 +46,35 @@ router.post("/user/reg", user.reg);
 router.get('/user/isNew', user.isNew)
 // 退出登录
 router.get('/user/logout', user.logout)
+// 文章发表
+router.post("/article/post", article.add);
 
 
 
 //---------------------分割线-----------------
-router.get('/', index.getIndex, async (ctx) => {
+// router.get('/', index.getIndex, async (ctx) => {
     // session
     
     // 文章列表
-})
+// })
 // 注册登录页面
-router.get(/^\/user\/(reg|login)/, user.index, async (ctx) => {
-    router.get("/user/islogin", user.isLogin);
+// router.get(/^\/user\/(reg|login)/, user.index, async (ctx) => {
+//     router.get("/user/islogin", user.isLogin);
     
-    router.post("/user/reg", user.reg);
-})
-// 退出登录
-router.get('/user/logout', user.logout)
-// 跳转发表页面
-router.get('/article', article.addArtPage, async (ctx) => {
-    router.get("/user/isNew", user.isNew)
-    router.post('/article', article.add)
-})
-router.get('/article/detail/:id', comment.details, async (ctx) => {
-    router.get("/user/isNew", user.isNew)
-    router.get("/article/getartinfo", comment.getdetail)
-    router.post('/comment', comment.publish) 
-})
+//     router.post("/user/reg", user.reg);
+// })
+// // 退出登录
+// router.get('/user/logout', user.logout)
+// // 跳转发表页面
+// router.get('/article', article.addArtPage, async (ctx) => {
+//     router.get("/user/isNew", user.isNew)
+//     router.post('/article', article.add)
+// })
+// router.get('/article/detail/:id', comment.details, async (ctx) => {
+//     router.get("/user/isNew", user.isNew)
+//     router.get("/article/getartinfo", comment.getdetail)
+//     router.post('/comment', comment.publish) 
+// })
 // 个人中心
 // router.get("/admin/:id", user.keepLogin, admin.index);
 module.exports = router;
