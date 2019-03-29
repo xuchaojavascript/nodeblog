@@ -22,8 +22,12 @@ exports.details = async (ctx, next) => {
 }
 // 文章详情页
 exports.getdetail = async (ctx) => {
-    let _id = ctx.request.header.referer.split('/').pop()
-
+    console.log(ctx);
+    
+    let _id = ctx.request.url.split('/').pop();
+    
+    console.log(_id);
+    
     let article = await Article
     .findById(_id)
     .populate("author", "username")

@@ -48,7 +48,8 @@ router.get('/user/isNew', user.isNew)
 router.get('/user/logout', user.logout)
 // 文章发表
 router.post("/article/post", article.add);
-
+// 获取文章详情
+router.get("/article/detail/:id", comment.getdetail)
 
 
 //---------------------分割线-----------------
