@@ -1,8 +1,8 @@
 const Comment = require('../module/comment')
 const Article = require("../module/article");
 const fs = require('fs')
-// 获取文章详情页
 
+// 获取文章详情页
 exports.details = async (ctx, next) => {    
     await new Promise((res, rej) => {
         fs.readFile('views/article.html', 'utf-8', (err, data) => {
@@ -22,12 +22,8 @@ exports.details = async (ctx, next) => {
 }
 // 文章详情页
 exports.getdetail = async (ctx) => {
-    console.log(ctx);
     
     let _id = ctx.request.url.split('/').pop();
-    
-    console.log(_id);
-    
     let article = await Article
     .findById(_id)
     .populate("author", "username")
@@ -39,27 +35,15 @@ exports.getdetail = async (ctx) => {
         .populate("author", "username avatar")
         .then(data => data, err => err)
     ctx.body = {
-        title: article.title,
         article,
         comment
     }
 }
+// 发表评论
 exports.publish = async (ctx) => {
     console.log(ctx.request.body);
-     
-    //用户没登录，提示请登录
-    if (ctx.session.isNew) {
-        //没登录
-        return ctx.body = {
-            status: 0,
-            msg: "请登录"
-        };
-    }
-    console.log(ctx.request.body);
-    
-    let comment = ctx.request.body;
-    comment.author = ctx.session.userId;
 
+    let comment = ctx.request.body;
     
     await new Promise((res, rej) =>{
         new Comment(comment)

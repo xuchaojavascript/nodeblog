@@ -50,8 +50,8 @@ router.get('/user/logout', user.logout)
 router.post("/article/post", article.add);
 // 获取文章详情
 router.get("/article/detail/:id", comment.getdetail)
-
-
+// 发表评论
+router.post("/comment", comment.publish);
 //---------------------分割线-----------------
 // router.get('/', index.getIndex, async (ctx) => {
     // session

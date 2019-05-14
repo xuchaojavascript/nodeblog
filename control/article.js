@@ -17,7 +17,6 @@ exports.addArtPage = async (ctx, next) => {
 
 // 添加文章
 exports.add = async (ctx) => {
-    console.log(ctx);
     let data = ctx.request.body;
     await new Promise((res, rej) =>{
         new Article(data)
@@ -40,21 +39,25 @@ exports.add = async (ctx) => {
 
 // 获取文章列表
 exports.getList = async (ctx) => {
-    let _tip = ctx.request.body;
-    console.log(ctx);
-    
+    let _tip = ctx.request.query.tip;
     let page = ctx.params.id || 1;
     let maxNum = await Article.estimatedDocumentCount((err, data) => {
         return err || data
     })
+    // if(_tip){
+    //     artList.add
+    // }
     let artList = await Article
-        .find({tips: _tip})
+    // if(_tip){
+    // }
+        .find(_tip ? {tips: _tip} : {})
         .sort("-createTime")
         .skip((page-1)*5)
         .limit(5)
         .populate("author", "_id username avatar")
         .then(data => data, err => err)
-        
+    console.log(artList);
+    
     ctx.body = {
         session: ctx.session,
         artList,
