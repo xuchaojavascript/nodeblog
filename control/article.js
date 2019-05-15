@@ -48,9 +48,7 @@ exports.getList = async (ctx) => {
     //     artList.add
     // }
     let artList = await Article
-    // if(_tip){
-    // }
-        .find(_tip ? {tips: _tip} : {})
+        .find( _tip ? { tips: _tip } : {} )
         .sort("-createTime")
         .skip((page-1)*5)
         .limit(5)

@@ -36,7 +36,7 @@ const logreg = require('../control/logreg')
 
 // 处理根路由
 //-------------------vue结合(前后端分离)---------------
-// 获取文章列表
+// 获取文章分页列表
 router.get('/article/getlist', article.getList)
 // 用户登录
 router.post("/user/login", user.login);
@@ -52,6 +52,12 @@ router.post("/article/post", article.add);
 router.get("/article/detail/:id", comment.getdetail)
 // 发表评论
 router.post("/comment", comment.publish);
+// 获取所有用户信息
+router.get("/user/list", admin.getUserList);
+// 获取所有（或某用户）文章列表
+router.get("/article/list", admin.getArticleList);
+// 获取所有（或某用户）评论列表
+router.get("/comment/list", admin.getComentList);
 //---------------------分割线-----------------
 // router.get('/', index.getIndex, async (ctx) => {
     // session
