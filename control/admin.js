@@ -41,9 +41,6 @@ exports.getUserList = async (ctx) => {
 	.find()
 	ctx.body = {
 		userList
-		// session: ctx.session,
-		// artList,
-		// maxNum,
 	}
 }
 // 获取所有（或某用户）文章列表
@@ -51,7 +48,7 @@ exports.getArticleList = async (ctx) => {
 	let userId = ctx.request.query.userId;
 	let articleList = await Article
 	.find( userId ? { author: userId } : {} )
-	.populate(author, "username")
+	.populate('author', "username")
 	ctx.body = {
 		articleList
 	}
@@ -59,16 +56,64 @@ exports.getArticleList = async (ctx) => {
 // 获取所有（或某用户）评论列表
 exports.getComentList = async (ctx) => {
 	let userId = ctx.request.query.userId;
-	let comment = await Comment
-	.find()
+	let commentList = await Comment
+	.find( userId ? { author: userId } : {} )
 	.populate([
 		{ path: 'author', select: 'username' },
 		{ path: 'article', select: 'title' },
 	])
 	ctx.body = {
-		comment
-		// session: ctx.session,
-		// artList,
-		// maxNum,
+		commentList
+	}
+}
+// 删除用户 先删除用户所有文章中的评论 然后删除文章 再删除用户所有评论
+exports.deleteUser = async (ctx) => {
+	let userId = ctx.request.query.userId
+	let error = ''
+	// 1、查找用户的所有文章
+	let articleList = await Article.find({author: userId})
+	// 2、删除所有文章中的评论
+	for (let index = 0; index < articleList.length; index++) {
+		await Comment.deleteMany({article: articleList[index]._id})
+	}
+	// 3、删除文章
+	await Article.deleteMany({author: userId})
+	// 4、删除用户评论
+	await Comment.deleteMany({author: userId})
+	// 5、删除用户
+	await User.deleteOne({_id: userId}, (err,res)=>{
+		console.log(err);
+		error = err
+	})
+	ctx.body = {
+		msg: error ? ('删除失败，' + error) : '删除成功'
+	}
+}
+// 删除文章
+exports.deleteArticle = async (ctx) => {
+	let articleId = ctx.request.query.articleId
+	let error = ''
+	// 1、先删除文章中的所有评论
+	await Comment.deleteMany({article: articleId})
+	// 2、然后再删除文章
+	await Article.deleteOne({_id: articleId}, (err,res)=>{
+		console.log(err);
+		error = err
+	})
+	ctx.body = {
+		msg: error ? ('删除失败，' + error) : '删除成功'
+	}
+}
+// 删除评论
+exports.deleteComment = async (ctx) => {
+	let commentId = ctx.request.query.commentId
+	let error = ''
+
+	await Comment.deleteOne({_id: commentId}, (err,res)=>{
+		console.log(err);
+		error = err
+	})
+	ctx.body = {
+		msg: error ? ('删除失败，' + error) : '删除成功'
 	}
 }

@@ -43,31 +43,31 @@ exports.login = async (ctx) => {
         })
     }).then(async data => {
         if(data){
-            // 设置cookie
-            ctx.cookies.set("username", username, {
-                // 配置cookie的属性
-                domain: "localhost",
-                path: "/",
-                maxAge: 1000*60*60,
-                httpOnly: true, //不让客户端操控，设置为不可见
-                overwrite: false //不可覆盖
-            })
-            ctx.cookies.set("userId", data[0]._id, {
-                // 配置cookie的属性
-                domain: "localhost",
-                path: "/",
-                maxAge: 1000*60*60,
-                httpOnly: true, //不让客户端操控，设置为不可见
-                overwrite: false //不可覆盖
-            })
-            ctx.cookies.set("avatar", data[0].avatar, {
-                // 配置cookie的属性
-                domain: "localhost",
-                path: "/",
-                maxAge: 1000*60*60,
-                httpOnly: true, //不让客户端操控，设置为不可见
-                overwrite: false //不可覆盖
-            })
+            // // 设置cookie
+            // ctx.cookies.set("username", data[0].username, {
+            //     // 配置cookie的属性
+            //     domain: "localhost",
+            //     path: "/",
+            //     maxAge: 1000*60*60,
+            //     httpOnly: true, //不让客户端操控，设置为不可见
+            //     overwrite: false //不可覆盖
+            // })
+            // ctx.cookies.set("userId", data[0]._id, {
+            //     // 配置cookie的属性
+            //     domain: "localhost",
+            //     path: "/",
+            //     maxAge: 1000*60*60,
+            //     httpOnly: true, //不让客户端操控，设置为不可见
+            //     overwrite: false //不可覆盖
+            // })
+            // ctx.cookies.set("avatar", data[0].avatar, {
+            //     // 配置cookie的属性
+            //     domain: "localhost",
+            //     path: "/",
+            //     maxAge: 1000*60*60,
+            //     httpOnly: true, //不让客户端操控，设置为不可见
+            //     overwrite: false //不可覆盖
+            // })
             // 设置后端session
             ctx.session = {
                 username,
