@@ -107,8 +107,11 @@ exports.deleteArticle = async (ctx) => {
 // 删除评论
 exports.deleteComment = async (ctx) => {
 	let commentId = ctx.request.query.commentId
+	let articleId = ctx.request.query.articleId
+	console.log(commentId, articleId);
+	
 	let error = ''
-
+	await Article.update({_id: articleId}, {$inc: {commentNum: -1}})
 	await Comment.deleteOne({_id: commentId}, (err,res)=>{
 		console.log(err);
 		error = err
