@@ -64,6 +64,10 @@ router.delete("/article/delete", admin.deleteArticle)
 router.get("/comment/list", admin.getComentList)
 // 删除评论
 router.delete("/comment/delete", admin.deleteComment)
+//上传头像
+router.post("/upload", upload.single('file'), admin.unload)
+
+
 //---------------------分割线-----------------
 // router.get('/', index.getIndex, async (ctx) => {
     // session

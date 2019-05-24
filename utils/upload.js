@@ -2,6 +2,7 @@ const multer = require('koa-multer')
 const {join} = require('path')
 
 const storage = multer.diskStorage({
+    
     // 存放位置
     destination: join(__dirname, '../public/avatar'),
     // 文件名
@@ -10,4 +11,4 @@ const storage = multer.diskStorage({
        cb(null, `${Date.now()}.${arrFileName[arrFileName.length - 1]}`)
     }
 })
-module.exports =  multer({storage})
+module.exports = multer({storage})

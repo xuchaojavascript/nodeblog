@@ -120,3 +120,27 @@ exports.deleteComment = async (ctx) => {
 		msg: error ? ('删除失败，' + error) : '删除成功'
 	}
 }
+// 修改用户头像
+exports.unload = async (ctx) => {
+	console.log(ctx.req.file.filename);
+	
+	const filename =  ctx.req.file.filename;
+	console.log(filename);
+	
+	await User.update(
+		{_id: ctx.session.userId},
+		{$set: {avatar: '/avatar/' + filename}}
+	).then(data => {
+		ctx.body = {
+			"code": 0,
+			"msg": "",
+			"data": true
+		}
+	}, err => {
+		ctx.body = {
+			"code": 0,
+			"msg": "",
+			"data": false
+		}
+	})
+}
